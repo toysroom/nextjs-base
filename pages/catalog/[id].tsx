@@ -13,7 +13,6 @@ export async function getStaticPaths() {
     paths: [
       { params: { id: '1' } },
       { params: { id: '2' } },
-      // { params: { id: '3' } }
     ],
     fallback: false
     // fallback: true
@@ -25,9 +24,10 @@ export async function getStaticPaths() {
 //   try {
 //     const res = await axios.get<Gadget[]>(API);
 //     const paths = res.data.map(gadget => ({ params: { id: gadget.id.toString() } }))
+//     console.log(paths);
 //     return {
 //       paths,
-//       fallback: true
+//       fallback: false
 //     }
 //   } catch(err) {
 //     return {

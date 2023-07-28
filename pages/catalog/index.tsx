@@ -47,7 +47,7 @@ const CatalogIndex = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) 
 
       <div className="flex">
         {
-          data?.map( (item: Gadget) => {
+          data.map( (item: Gadget) => {
             return (
               // <div key={item.id}>
               //   <Image src={item.image} alt={item.title} width={300} height={300}/>
