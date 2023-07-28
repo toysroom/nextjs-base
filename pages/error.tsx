@@ -1,13 +1,13 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
 
-const Page404: NextPage = () => {
+const Error: NextPage = () => {
   return (
     <div className="text-center">
-      <div>Pagina non esistente o errore</div>
+      <div>ErrorErrorErrorErrorError</div>
       <Link href="/" className="text-pink-500">Torna alla Home</Link>
     </div>
   )
 }
 
-export default Page404;
+export default Error;
