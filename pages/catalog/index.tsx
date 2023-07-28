@@ -12,7 +12,6 @@ export const getServerSideProps = async() => {
   
   try {
     const { data } = await axios.get<Gadget[]>(API);
-    console.log('server', data);
     return {
       props: {
         data
@@ -40,7 +39,6 @@ const CatalogIndex = ({ data }: InferGetServerSidePropsType<typeof getServerSide
 // const CatalogIndex: React.FC<CatalogIndexProps> = ({ data }) => {
 
 // const CatalogIndex = (props: any) => {
-  console.log('client', data);
   
   return (
     <>
@@ -53,7 +51,7 @@ const CatalogIndex = ({ data }: InferGetServerSidePropsType<typeof getServerSide
 
       <div className="flex">
         {
-          data?.map( (item: Gadget) => {
+          data.map( (item: Gadget) => {
             return (
               // <div key={item.id}>
               //   <Image src={item.image} alt={item.title} width={300} height={300}/>
