@@ -2,8 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 
-const API = 'https://my-json-server.typicode.com/training-api/next-course-gadgets/gadgets';
-
 const CatalogDetails = () => {
   return (
     <>
