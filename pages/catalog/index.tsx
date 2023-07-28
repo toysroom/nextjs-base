@@ -3,29 +3,24 @@ import Image from 'next/image';
 import Head from 'next/head';
 import axios from 'axios';
 import Gadget from '../../models/Gadget';
-import { InferGetServerSidePropsType } from 'next';
+import { InferGetServerSidePropsType, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
 const API = 'https://my-json-server.typicode.com/training-api/next-course-gadgets/gadgets';
 
-export const getServerSideProps = async() => {
+export const getStaticProps = async() => {
   
   try {
     const { data } = await axios.get<Gadget[]>(API);
+    console.log('server', data);
     return {
       props: {
         data
       },
     }
   } catch (err) {
-    // return {
-    //   notFound: true
-    // }
     return {
-      redirect: {
-        destination: '/error',
-        //permanent: true 
-      },
+      notFound: true
     }
   }
 }
@@ -34,11 +29,12 @@ export const getServerSideProps = async() => {
 //   data: Gadget[]
 // }
 
-const CatalogIndex = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const CatalogIndex = ({ data }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
 // const CatalogIndex: React.FC<CatalogIndexProps> = ({ data }) => {
 
 // const CatalogIndex = (props: any) => {
+  console.log('client', data);
   
   return (
     <>
@@ -51,7 +47,7 @@ const CatalogIndex = ({ data }: InferGetServerSidePropsType<typeof getServerSide
 
       <div className="flex">
         {
-          data.map( (item: Gadget) => {
+          data?.map( (item: Gadget) => {
             return (
               // <div key={item.id}>
               //   <Image src={item.image} alt={item.title} width={300} height={300}/>

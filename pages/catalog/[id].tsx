@@ -3,12 +3,40 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Image from 'next/image';
 import axios from 'axios';
-import { GetServerSidePropsContext, NextPage } from 'next';
+import { GetServerSidePropsContext, GetStaticPropsContext, NextPage } from 'next';
 import Gadget from '../../models/Gadget';
 
 const API = 'https://my-json-server.typicode.com/training-api/next-course-gadgets/gadgets';
 
-export const getServerSideProps = async(context: GetServerSidePropsContext) => {
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { id: '1' } },
+      { params: { id: '2' } },
+      // { params: { id: '3' } }
+    ],
+    fallback: false
+    // fallback: true
+    // fallback: 'blocking'
+  };
+}
+
+// export async function getStaticPaths() {
+//   try {
+//     const res = await axios.get<Gadget[]>(API);
+//     const paths = res.data.map(gadget => ({ params: { id: gadget.id.toString() } }))
+//     return {
+//       paths,
+//       fallback: true
+//     }
+//   } catch(err) {
+//     return {
+//       notFound: true
+//     }
+//   }
+// }
+
+export const getStaticProps = async(context: GetStaticPropsContext) => {
   const id = context.params?.id;
   try {
     const { data } = await axios.get<Gadget>(`${API}/${id}`)
